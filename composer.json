@@ -1,0 +1,28 @@
+{
+    "name": "skyrpex/laravel-starpack",
+    "description": "Starpack integration for Laravel",
+    "keywords": ["starpack", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/contracts": "5.4.*",
+        "illuminate/support": "5.4.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "files": [
+            "src/Support/helpers.php"
+        ],
+        "psr-4": {
+            "Skyrpex\\Starpack\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Skyrpex\\Starpack\\Tests\\": "tests/"
+        }
+    }
+}
