@@ -42,8 +42,13 @@ Next, add the following line to your `RouteServiceProvider` (it will provide the
 Finally, you need to publish the assets. I recommend erasing your current `resources/assets` folder first. 
 
 ```bash
-# Publish vendor assets
 php artisan vendor:publish --provider="Skyrpex\Starpack\StarpackServiceProvider" --tag=assets
+```
+
+Aside, I recommend publishing and customizing the SPA landing page. It's a pretty straightforward Blade page.
+
+```bash
+php artisan vendor:publish --provider="Skyrpex\Starpack\StarpackServiceProvider" --tag=views
 ```
 
 ## Usage
