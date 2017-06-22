@@ -4,6 +4,7 @@ namespace Skyrpex\Starpack;
 
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Routing\Registrar as Router;
+use Illuminate\Contracts\Routing\UrlGenerator as URL;
 
 class Starpack
 {
@@ -14,9 +15,17 @@ class Starpack
      */
     protected $router;
 
-    public function __construct(Router $router)
+    /**
+     * The URL generator instance.
+     *
+     * @var URL
+     */
+    protected $url;
+
+    public function __construct(Router $router, URL $url)
     {
         $this->router = $router;
+        $this->url = $url;
     }
 
     public function routes()
@@ -50,6 +59,14 @@ class Starpack
         return implode('', [
             '<script>window.STARPACK = window.STARPACK || [];</script>',
             "<script>STARPACK.push($json);</script>",
+        ]);
+    }
+
+    public function addMandatoryScriptGlobals()
+    {
+        return $this->addScriptGlobals([
+            'BASE_URL' => $this->url->to('/'),
+            'WEBPACK_PUBLIC_PATH' => $this->url->to('assets'),
         ]);
     }
 };

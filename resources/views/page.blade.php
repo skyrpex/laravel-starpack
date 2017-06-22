@@ -1,7 +1,6 @@
 @inject('starpack', 'Skyrpex\Starpack\Starpack')
 @inject('auth', 'Illuminate\Contracts\Auth\Guard')
 @inject('config', 'Illuminate\Contracts\Config\Repository')
-@inject('url', 'Illuminate\Contracts\Routing\UrlGenerator')
 
 <!DOCTYPE html>
 <html lang="{{ $config['app.locale'] }}">
@@ -16,12 +15,14 @@
     <link rel="stylesheet" href="{{ $href }}">
   @endforeach
 
-  {{-- Pass useful data to the scripts --}}
-  {!! $starpack->addScriptGlobals([
-    'BASE_URL' => $url->to('/'),
-    'WEBPACK_PUBLIC_PATH' => $url->to('assets'),
+  {{-- Pass required data to the scripts --}}
+  {!! $starpack->addMandatoryScriptGlobals() !!}
+
+  {{-- Pass custom data to the scripts --}}
+  {{!! $starpack->addScriptGlobals([
     'USER' => $auth->user(),
-  ]) !!}
+    'APP_DEBUG' => $config['app.debug'],
+  ]) !!}}
 </head>
 <body>
   {{-- Include the app scripts --}}
