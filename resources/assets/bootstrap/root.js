@@ -1,13 +1,9 @@
 import Vue from 'vue';
-import { data as env } from './env';
+import router from './router';
 
 export default new Vue({
-  computed: {
-    env() {
-      return env;
-    },
-  },
+  router,
   render(h) {
-    return h('div', JSON.stringify(this.env));
+    return h('router-view');
   },
 });
