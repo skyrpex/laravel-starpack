@@ -2,7 +2,7 @@
 
 This package provides a minimal scaffolding to develop SPA's with Laravel.
 
-Uses [Poi](https://github.com/egoist/poi) along with [Vue](https://github.com/vuejs/vue). 
+Uses [poi](https://github.com/egoist/poi) along with [vue](https://github.com/vuejs/vue) and [vue-router](https://github.com/vuejs/vue-router). 
 
 ## Installation
 
@@ -12,7 +12,7 @@ You can install this package via composer:
 composer require skyrpex/laravel-starpack
 ```
 
-Next, you must install the service provider:
+You must install the service provider:
 
 ```php
 <?php
@@ -23,25 +23,30 @@ Next, you must install the service provider:
 ],
 ```
 
-Finally, you need to publish the assets. I recommend erasing your current resources/assets folder first. 
+Next, add the following line to your `RouteServiceProvider` (it will provide the fallback route for the SPA to work):
+
+```php
+<?php
+// ...
+    public function map()
+    {
+        $this->mapApiRoutes();
+
+        $this->mapWebRoutes();
+
+        $this->app->make(Starpack::class)->routes();
+    }
+// ...
+```
+
+Finally, you need to publish the assets. I recommend erasing your current `resources/assets` folder first. 
 
 ```bash
 # Publish vendor assets
 php artisan vendor:publish --provider="Skyrpex\Starpack\StarpackServiceProvider" --tag=assets
 ```
 
-The published directories and files are the following:
-
-```
-your-app/
-|- public/assets/
-|- resources/assets/
-|- package.json
-|- poi.config.js
-```
-
 ## Usage
-
 
 ### Development with HMR
 
@@ -62,3 +67,5 @@ You'll have a HMR server working along with the artisan's server :+1:.
 ```bash
 yarn build
 ```
+
+Now, your `public/assets` directory will contain the minified bundles, ready for producton!
