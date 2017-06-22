@@ -43,4 +43,13 @@ class Starpack
 
         return is_null($path) ? $manifest : Arr::get($manifest, $path, $default);
     }
+
+    public function addScriptGlobals(array $values)
+    {
+        $json = json_encode($values);
+        return implode('', [
+            '<script>window.STARPACK = window.STARPACK || [];</script>',
+            "<script>STARPACK.push($json);</script>",
+        ]);
+    }
 };
