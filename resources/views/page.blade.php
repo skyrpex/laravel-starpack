@@ -19,10 +19,10 @@
   {!! $starpack->addMandatoryScriptGlobals() !!}
 
   {{-- Pass custom data to the scripts --}}
-  {{!! $starpack->addScriptGlobals([
+  {!! $starpack->addScriptGlobals([
     'USER' => $auth->user(),
     'APP_DEBUG' => $config['app.debug'],
-  ]) !!}}
+  ]) !!}
 </head>
 <body>
   {{-- Include the app scripts --}}
